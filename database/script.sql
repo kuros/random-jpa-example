@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS dept_emp,
 /*!50503 select CONCAT('storage engine: ', @@default_storage_engine) as INFO */;
 
 CREATE TABLE employees (
-                         emp_no      INT             NOT NULL,
+                         emp_no      INT             NOT NULL AUTO_INCREMENT,
                          birth_date  DATE            NOT NULL,
                          first_name  VARCHAR(14)     NOT NULL,
                          last_name   VARCHAR(16)     NOT NULL,
@@ -25,49 +25,57 @@ CREATE TABLE employees (
 );
 
 CREATE TABLE departments (
-                           dept_no     INT         NOT NULL,
+                           dept_no     INT         NOT NULL AUTO_INCREMENT,
                            dept_name   VARCHAR(40)     NOT NULL,
                            PRIMARY KEY (dept_no),
                            UNIQUE  KEY (dept_name)
 );
 
 CREATE TABLE dept_manager (
+                            id           INT             NOT NULL AUTO_INCREMENT,
                             emp_no       INT             NOT NULL,
                             dept_no      INT         NOT NULL,
                             from_date    DATE            NOT NULL,
                             to_date      DATE            NOT NULL,
                             FOREIGN KEY (emp_no)  REFERENCES employees (emp_no)    ON DELETE CASCADE,
                             FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
-                            PRIMARY KEY (emp_no,dept_no)
+                            UNIQUE KEY (emp_no,dept_no),
+                            PRIMARY KEY (id)
 );
 
 CREATE TABLE dept_emp (
+                        id          INT             NOT NULL AUTO_INCREMENT,
                         emp_no      INT             NOT NULL,
                         dept_no     INT         NOT NULL,
                         from_date   DATE            NOT NULL,
                         to_date     DATE            NOT NULL,
                         FOREIGN KEY (emp_no)  REFERENCES employees   (emp_no)  ON DELETE CASCADE,
                         FOREIGN KEY (dept_no) REFERENCES departments (dept_no) ON DELETE CASCADE,
-                        PRIMARY KEY (emp_no,dept_no)
+                        UNIQUE KEY (emp_no,dept_no),
+                        PRIMARY KEY (id)
 );
 
 CREATE TABLE titles (
+                      id          INT             NOT NULL AUTO_INCREMENT,
                       emp_no      INT             NOT NULL,
                       title       VARCHAR(50)     NOT NULL,
                       from_date   DATE            NOT NULL,
                       to_date     DATE,
                       FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
-                      PRIMARY KEY (emp_no,title, from_date)
+                      UNIQUE KEY (emp_no,title, from_date),
+                      PRIMARY KEY (id)
 )
 ;
 
 CREATE TABLE salaries (
+                        id           INT             NOT NULL AUTO_INCREMENT,
                         emp_no      INT             NOT NULL,
                         salary      INT             NOT NULL,
                         from_date   DATE            NOT NULL,
                         to_date     DATE            NOT NULL,
                         FOREIGN KEY (emp_no) REFERENCES employees (emp_no) ON DELETE CASCADE,
-                        PRIMARY KEY (emp_no, from_date)
+                        UNIQUE KEY (emp_no, from_date),
+                        PRIMARY KEY (id)
 )
 ;
 
@@ -100,13 +108,13 @@ INSERT INTO `departments` VALUES
                               (8,'Research'),
                               (9,'Customer Service');
 
-INSERT INTO `dept_manager` VALUES
+INSERT INTO `dept_manager` (emp_no, dept_no, from_date, to_date) VALUES
                               (10011, 1, '1985-01-01', '1991-10-01'),
                               (10014, 1, '1991-10-01', '9999-01-01'),
                               (10005, 2, '1985-01-01', '1989-12-17'),
                               (10008, 2, '1989-12-17', '9999-01-01');
 
-INSERT INTO `dept_emp` VALUES (10001, 1,'1986-06-26','9999-01-01'),
+INSERT INTO `dept_emp` (emp_no, dept_no, from_date, to_date) VALUES (10001, 1,'1986-06-26','9999-01-01'),
                               (10002, 1,'1996-08-03','9999-01-01'),
                               (10003, 2,'1995-12-03','9999-01-01'),
                               (10004, 2,'1986-12-01','9999-01-01'),
@@ -123,7 +131,7 @@ INSERT INTO `dept_emp` VALUES (10001, 1,'1986-06-26','9999-01-01'),
                               (10014, 1,'1983-12-29','1991-10-01'),
                               (10015, 2,'1992-09-19','1993-08-22');
 
-INSERT INTO `titles` VALUES (10001,'Senior Engineer','1986-06-26','9999-01-01'),
+INSERT INTO `titles` (emp_no, title, from_date, to_date) VALUES (10001,'Senior Engineer','1986-06-26','9999-01-01'),
                             (10002,'Staff','1996-08-03','9999-01-01'),
                             (10003,'Senior Engineer','1995-12-03','9999-01-01'),
                             (10004,'Engineer','1986-12-01','1995-12-01'),
@@ -145,7 +153,7 @@ INSERT INTO `titles` VALUES (10001,'Senior Engineer','1986-06-26','9999-01-01'),
                             (10014,'Engineer','1993-12-29','9999-01-01'),
                             (10015,'Senior Staff','1992-09-19','1993-08-22');
 
-INSERT INTO `salaries` VALUES (10001,60117,'1986-06-26','1987-06-26'),
+INSERT INTO `salaries` (emp_no, salary, from_date, to_date) VALUES (10001,60117,'1986-06-26','1987-06-26'),
                               (10001,62102,'1987-06-26','1988-06-25'),
                               (10001,66074,'1988-06-25','1989-06-25'),
                               (10001,66596,'1989-06-25','1990-06-25'),
