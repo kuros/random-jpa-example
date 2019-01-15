@@ -9,10 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-public class Employees {
+@Table(name = "employees")
+public class Employee {
 
     @Id
     @Column(name = "emp_no")
@@ -97,14 +99,14 @@ public class Employees {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final Employees employees = (Employees) o;
+        final Employee employee = (Employee) o;
 
-        if (empNo != null ? !empNo.equals(employees.empNo) : employees.empNo != null) return false;
-        if (birthDate != null ? !birthDate.equals(employees.birthDate) : employees.birthDate != null) return false;
-        if (firstName != null ? !firstName.equals(employees.firstName) : employees.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(employees.lastName) : employees.lastName != null) return false;
-        if (gender != null ? !gender.equals(employees.gender) : employees.gender != null) return false;
-        if (hireDate != null ? !hireDate.equals(employees.hireDate) : employees.hireDate != null) return false;
+        if (empNo != null ? !empNo.equals(employee.empNo) : employee.empNo != null) return false;
+        if (birthDate != null ? !birthDate.equals(employee.birthDate) : employee.birthDate != null) return false;
+        if (firstName != null ? !firstName.equals(employee.firstName) : employee.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(employee.lastName) : employee.lastName != null) return false;
+        if (gender != null ? !gender.equals(employee.gender) : employee.gender != null) return false;
+        if (hireDate != null ? !hireDate.equals(employee.hireDate) : employee.hireDate != null) return false;
 
         return true;
     }

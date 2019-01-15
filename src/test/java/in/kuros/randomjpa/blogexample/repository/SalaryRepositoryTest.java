@@ -5,7 +5,7 @@ import com.github.kuros.random.jpa.JPAContext;
 import com.github.kuros.random.jpa.JPAContextFactory;
 import com.github.kuros.random.jpa.persistor.model.ResultMap;
 import com.github.kuros.random.jpa.types.Entity;
-import in.kuros.randomjpa.blogexample.entity.Salaries;
+import in.kuros.randomjpa.blogexample.entity.Salary;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,20 +30,20 @@ public class SalaryRepositoryTest {
         final JPAContext jpaContext = JPAContextFactory.newInstance(Database.MY_SQL, entityManager)
                 .generate();
 
-        final ResultMap resultMap = jpaContext.createAndPersist(Entity.of(Salaries.class));
+        final ResultMap resultMap = jpaContext.createAndPersist(Entity.of(Salary.class));
         resultMap.print(System.out::println);
 
-        final Salaries salaries = resultMap.get(Salaries.class);
+        final Salary salary = resultMap.get(Salary.class);
 
-        final List<Salaries> latestSalaries = salaryRepository.findLatestSalaries();
+        final List<Salary> latestSalaries = salaryRepository.findLatestSalaries();
 
-        final Optional<Salaries> result = latestSalaries
+        final Optional<Salary> result = latestSalaries
                 .stream()
-                .filter(sal -> sal.getId().equals(salaries.getId())).findFirst();
+                .filter(sal -> sal.getId().equals(salary.getId())).findFirst();
 
         Assert.assertTrue(result.isPresent());
-        Assert.assertEquals(salaries.getSalary(), result.get().getSalary());
-        Assert.assertEquals(salaries.getFromDate(), result.get().getFromDate());
-        Assert.assertEquals(salaries.getToDate(), result.get().getToDate());
+        Assert.assertEquals(salary.getSalary(), result.get().getSalary());
+        Assert.assertEquals(salary.getFromDate(), result.get().getFromDate());
+        Assert.assertEquals(salary.getToDate(), result.get().getToDate());
     }
 }

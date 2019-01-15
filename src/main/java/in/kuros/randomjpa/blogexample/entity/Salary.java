@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Entity
-public class Salaries {
+@Table(name = "salaries")
+public class Salary {
 
     @Id
     @Column(name = "id")
@@ -78,12 +80,12 @@ public class Salaries {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        final Salaries salaries = (Salaries) o;
+        final Salary sal = (Salary) o;
 
-        if (id != null ? !id.equals(salaries.id) : salaries.id != null) return false;
-        if (salary != null ? !salary.equals(salaries.salary) : salaries.salary != null) return false;
-        if (fromDate != null ? !fromDate.equals(salaries.fromDate) : salaries.fromDate != null) return false;
-        if (toDate != null ? !toDate.equals(salaries.toDate) : salaries.toDate != null) return false;
+        if (id != null ? !id.equals(sal.id) : sal.id != null) return false;
+        if (this.salary != null ? !this.salary.equals(sal.salary) : sal.salary != null) return false;
+        if (fromDate != null ? !fromDate.equals(sal.fromDate) : sal.fromDate != null) return false;
+        if (toDate != null ? !toDate.equals(sal.toDate) : sal.toDate != null) return false;
 
         return true;
     }
