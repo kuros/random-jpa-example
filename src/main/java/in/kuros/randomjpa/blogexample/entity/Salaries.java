@@ -48,6 +48,13 @@ public class Salaries {
         this.salary = salary;
     }
 
+    public Integer getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(final Integer employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public LocalDate getFromDate() {
         return fromDate;
