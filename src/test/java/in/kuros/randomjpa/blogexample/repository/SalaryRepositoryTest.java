@@ -81,7 +81,7 @@ public class SalaryRepositoryTest {
 
         Assert.assertTrue(result.isPresent());
 
-        Assert.assertEquals("", salary2.getId(), result.get().getId());
+        Assert.assertEquals("The salary id should match with latest salary", salary2.getId(), result.get().getId());
         Assert.assertEquals(salary2.getSalary(), result.get().getSalary());
         Assert.assertEquals(salary2.getFromDate(), result.get().getFromDate());
         Assert.assertEquals(salary2.getToDate(), result.get().getToDate());
