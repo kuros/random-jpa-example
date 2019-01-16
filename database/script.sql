@@ -105,6 +105,15 @@ CREATE TABLE play_group_member (
 )
 ;
 
+CREATE TABLE employee_inventory_audit (
+    id          INT NOT NULL AUTO_INCREMENT,
+    emp_no      INT NOT NULL,
+    inventory   VARCHAR(40) NOT NULL,
+    quantity    INT NOT NULL,
+    purchase_date DATE NOT NULL,
+    PRIMARY KEY (id)
+);
+
 INSERT INTO `employees` VALUES (10001,'1953-09-02','Georgi','Facello','M','1986-06-26'),
                                (10002,'1964-06-02','Bezalel','Simmel','F','1985-11-21'),
                                (10003,'1959-12-03','Parto','Bamford','M','1986-08-28'),
